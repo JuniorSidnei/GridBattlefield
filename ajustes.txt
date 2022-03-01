@@ -1,0 +1,16 @@
+classe para os personagens onde cada um herda as funções e status, e são atribuidos no construtor de cada um,
+assim é só criar cada um passando os valores na inicialização e o tipo. 
+
+ter um character manager para centralizar as informações dos chars
+ele vai ser resposável por criar, pegar um char especifico, mandar fazer as ações
+
+Ter todos os managers centralizados dentro do battlefield, separar cada coisa para não ficar
+cada um chamando um manager dentro do outro. 
+
+battlefield vai ter um função initialize, e inicializar tudo que for necessário:
+os characters, o grid...etc
+
+Ter um Manager para o turno, tudo relacionado ao turno será ele quem vai cuidar.
+
+O Grid manager vai cuidar de saber as posições do jogador e do inimigo, para informar quais slots ocupados
+e buscar os grids para movimentação e ataque dos jogadores. 
