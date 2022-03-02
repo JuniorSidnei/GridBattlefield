@@ -1,23 +1,11 @@
 #include "BaseCharacter.h"
-using namespace std;
-
-BaseCharacter::BaseCharacter(float health, float baseDamage, float damageMultiplier, char icon) {
-	m_health = health;
-	m_baseDamage = baseDamage;
-	m_damageMultiplier = damageMultiplier;
-	m_icon = icon;
-}
-
-BaseCharacter::~BaseCharacter() {
-
-}
 
 void BaseCharacter::attack(BaseCharacter* target) {
 	target->takeDamage(m_baseDamage * m_damageMultiplier);
 }
 
-void BaseCharacter::moveTo(GridBoxPosition* gridPosition) {
-	m_gridPosition = gridPosition;
+void BaseCharacter::moveTo(GridBox newGridBox) {
+	m_gridBox = newGridBox;
 }
 
 void BaseCharacter::takeDamage(int damage) {
@@ -26,4 +14,12 @@ void BaseCharacter::takeDamage(int damage) {
 
 bool BaseCharacter::isCharacterDead() {
 	return m_health <= 0;
+}
+
+void BaseCharacter::setCharacterClassAndStatus(CharacterClass characterClass) {
+	m_characterClass = characterClass;
+	m_health = m_characterStatus[m_characterClass].Health;
+	m_baseDamage = m_characterStatus[m_characterClass].BaseDamage;
+	m_damageMultiplier = m_characterStatus[m_characterClass].DamageMultiplier;
+	m_icon= m_characterStatus[m_characterClass].Icon;
 }

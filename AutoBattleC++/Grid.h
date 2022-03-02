@@ -1,21 +1,27 @@
+#ifndef Grid_h
+#define Grid_h
 #pragma once
-#include <Vector>
-#include "Types.h"
 
-class Grid
-{
+#include <Vector>
+#include "GridBox.h"
+
+class Grid {
 
 public:
 
-    Grid(int Lines, int Columns);
+    Grid(int lines, int columns);
+    Grid() {  };
     ~Grid();
 
-    std::vector<Types::GridBox> grids;
+    std::vector<GridBox> getGridBoxes() { return m_gridBoxes; }
+    GridBox getGridBoxWithIndex(int index);
 
-    int xLenght;
-    int yLength;
-    
-    // prints the matrix that indicates the tiles of the battlefield
-    void drawBattlefield(int Lines, int Columns);
+    void drawBattlefield();
+
+private:
+    int m_lines = 0;
+    int m_collumns = 0;
+    std::vector<GridBox> m_gridBoxes;
 };
+#endif
 

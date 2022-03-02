@@ -1,68 +1,100 @@
+#ifndef BaseCharacter_h
+#define BaseCharacter_h
 #pragma once
+#include "GridBox.h"
+#include <map>
+#include <string>
+
 using namespace std;
 
 class BaseCharacter {
 public:
 
-	enum CharacterType {
+	enum class CharacterType {
 		Player, Enemy
 	};
 
-    enum CharacterClass {
+    enum class CharacterClass {
         Paladin = 1,
         Warrior = 2,
         Cleric = 3,
         Archer = 4
     };
 
-    struct GridBoxPosition {
-        int PositionX;
-        int PositionY;
-        bool IsPositionOccupied;
-        int IndexPosition;
+    struct CharacterStatus {
+        int Health = 0;
+        float BaseDamage = 0;
+        float DamageMultiplier = 0;
+        char Icon = 'A';
+        string ClassName = "a";
 
-        GridBoxPosition(int positionX, int positionY, bool isPositionOccupied, int indexPosition) {
-            PositionX = positionX;
-            PositionY = positionY;
-            IsPositionOccupied = isPositionOccupied;
-            IndexPosition = indexPosition;
-        }
+        CharacterStatus(int health, float baseDamage, float damageMultiplier, char icon, const string& className) {
+            Health = health;
+            BaseDamage = baseDamage;
+            DamageMultiplier = damageMultiplier;
+            Icon = icon;
+            ClassName = className;
+        };
+
+        CharacterStatus() {};
     };
 
-    BaseCharacter(float health, float baseDamage, float damageMultiplier, char icon);
-    ~BaseCharacter();
+    BaseCharacter() {};
+    ~BaseCharacter() {};
 
     void attack(BaseCharacter *target);
-    void moveTo(GridBoxPosition *gridPosition);
+    void moveTo(GridBox newGridBox);
 
     void takeDamage(int damage);
     bool isCharacterDead();
 
-    float getHealth() { return m_health; }
-    void setHealth(int health) { m_health = health; }
+    inline int getHealth() { return m_health; }
+    inline void setHealth(int health) { m_health = health; }
 
-    float getBaseDamage() { return m_baseDamage; }
-    void setBaseDamage(float baseDamage) { m_baseDamage = baseDamage; }
+    inline float getBaseDamage() { return m_baseDamage; }
+    inline void setBaseDamage(float baseDamage) { m_baseDamage = baseDamage; }
 
-    float getDamageMultiplier() { return m_damageMultiplier; }
-    void setDamageMultiplier(float damageMultiplier) { m_damageMultiplier = damageMultiplier; }
+    inline float getDamageMultiplier() { return m_damageMultiplier; }
+    inline void setDamageMultiplier(float damageMultiplier) { m_damageMultiplier = damageMultiplier; }
 
     char getIcon() { return m_icon; }
-    void setIcon(char icon) { m_icon = icon; }
+    inline void setIcon(char icon) { m_icon = icon; }
 
-    BaseCharacter *getTarget() { return m_target; }
-    void setTarget(BaseCharacter *target) { m_target = target; }
+    inline BaseCharacter *getTarget() { return m_target; }
+    inline void setTarget(BaseCharacter *target) { m_target = target; }
 
-    GridBoxPosition *getGridPosition() { return m_gridPosition; }
-    void setGridPosition(GridBoxPosition* gridPosition) { m_gridPosition = gridPosition; }
+    inline GridBox getGridBox() { return m_gridBox; }
+    inline void setGridBox(GridBox gridBox) { m_gridBox = gridBox; }
+
+    inline CharacterType getType() { return m_characterType; }
+    inline void setCharacterType(CharacterType characterType) { m_characterType = characterType; }
+
+    inline string getName() { return m_name; }
+    inline void setName(const string& name) { m_name = name; }
+
+    inline CharacterStatus getCharacteStatus() { return m_characterStatus[m_characterClass]; }
+    void setCharacterClassAndStatus(CharacterClass characterClass);
+
+    inline string getClassName() { return m_characterStatus[m_characterClass].ClassName; }
 
 protected:
-    float m_health = 0;
+    int m_health = 0;
     float m_baseDamage = 0;
     float m_damageMultiplier = 0;
     char m_icon = 0;
+    CharacterType m_characterType = CharacterType::Player;
+    CharacterClass m_characterClass = CharacterClass::Paladin;
+    string m_name;
 
     BaseCharacter* m_target = nullptr;
-    GridBoxPosition* m_gridPosition = nullptr;
-};
+    GridBox m_gridBox;
 
+
+    map<CharacterClass, CharacterStatus> m_characterStatus {
+        { CharacterClass::Paladin, CharacterStatus(250, 25.0f, 1.2f, 'P', "Paladin")},
+        { CharacterClass::Archer, CharacterStatus(150, 35.0f, 1.5f, 'A', "Archer")},
+        { CharacterClass::Warrior, CharacterStatus(350, 30.0f, 1.2f, 'W', "Warrior")},
+        { CharacterClass::Cleric, CharacterStatus(200, 20.0f, 1.3f, 'C', "Cleric")}
+    };
+};
+#endif
