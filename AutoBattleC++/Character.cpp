@@ -6,37 +6,6 @@
 #include <algorithm>
 
 using namespace std;
-Character::Character(Types::CharacterClass charcaterClass)
-{
-
-}
-
-Character::~Character() 
-{
-
-}
-
-bool Character::TakeDamage(float amount) 
-{
-	if ((Health -= BaseDamage) <= 0) 
-	{
-		Die();
-		return true;
-	}
-	return false;
-}
-
-void Character::Die() 
-{
-	// TODO >> kill
-	//TODO >> end the game?
-}
-
-void Character::WalkTo(bool CanWalk) 
-{
-
-}
-
 
 
 void Character::StartTurn(Grid* battlefield) {
@@ -108,14 +77,3 @@ void Character::StartTurn(Grid* battlefield) {
         }
     }
 }
-
-bool Character::CheckCloseTargets(Grid* battlefield)
-{
-
-}
-
-void Character::Attack(Character* target) 
-{
-
-}
-
