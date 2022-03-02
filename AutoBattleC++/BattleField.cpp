@@ -16,8 +16,7 @@ void BattleField::Setup() {
     m_grid = Grid(5, 5);
     //initializing all characters(player and enemy)
     m_characterManager.initializePlayers();
-    //TODO assemble this after the grid is created
-    //make a random number to get a box in the grid an set to player and enemy
+    //make a random number to get a box in the grid an set to player and enemy box positions
  
 }
 
@@ -25,7 +24,7 @@ void BattleField::GetPlayerChoice() {
     //asks for the player to choose between for possible classes via console.
     cout << "Choose Between One of this Classes, type the number of the class\n";
 
-    cout << "[1] Paladin, [2] Warrior, [3] Cleric, [4] Archer";
+    cout << "[1] Paladin, [2] Warrior, [3] Cleric, [4] Archer\n";
     //store the player choice in a variable
     int choice;  
     string name;
@@ -39,11 +38,11 @@ void BattleField::GetPlayerChoice() {
     cout << "Here are the class status.\n";
     cout << "HP: " << player->getHealth() << "\n";
     cout << "Damage: " << player->getBaseDamage() << "\n";
-    cout << "Damage multiplier: " << player->getDamageMultiplier() << "\n";
+    cout << "Damage multiplier: " << player->getDamageMultiplier() << "\n"; 
     cout << "A legendary " << player->getClassName() << " must have a name, so write your name: " << "\n";
 
-    getline(cin, name);
-    cout << "Let's begin, " << name << "!\n";
+    cin >> name;
+    cout << "Let's begin, " << name << "!\n\n\n";
     CreateEnemyCharacter();
 }
 
@@ -54,14 +53,14 @@ void BattleField::CreateEnemyCharacter() {
     auto enemyClass = getClass(rand() % 4 + 1);
     auto enemy = m_characterManager.getEnemy();
     enemy->setCharacterClassAndStatus(enemyClass);
-    cout << "Excelent! Enemy class is: " << enemy->getClassName() << "\n";
+    cout << "Enemy class is: " << enemy->getClassName() << "\n";
     cout << "Here are the class status.\n";
     cout << "HP: " << enemy->getHealth() << "\n";
     cout << "Damage: " << enemy->getBaseDamage() << "\n";
     cout << "Damage multiplier: " << enemy->getDamageMultiplier() << "\n";
-    cout << "A legendary enemy " << enemy->getClassName() << "must have a name, so write their name: " << "\n";
+    cout << "A legendary enemy " << enemy->getClassName() << " must have a name, so write his name: " << "\n";
 
-    getline(cin, name);
+    cin >> name;
     cout << "You will fight against the might: " << name << "!\n";
 }
 
