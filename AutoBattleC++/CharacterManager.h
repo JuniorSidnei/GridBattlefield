@@ -13,7 +13,7 @@ public:
 
 	~CharacterManager();
 	void initializePlayers();
-	
+	void sortAllPlayers();
 
 public:
 

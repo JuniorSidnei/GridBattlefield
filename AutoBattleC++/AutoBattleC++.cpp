@@ -8,7 +8,12 @@ int main()
     BattleField* battleField = new(BattleField);
     battleField->Setup();
     battleField->GetPlayerChoice();
-    getchar();
+
+    if (battleField->isSetupComplete()) {
+        battleField->StartGame();
+    }
+
+    getchar(); 
 }
 
 

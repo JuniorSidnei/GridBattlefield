@@ -2,6 +2,7 @@
 #define Battlefield_h
 #include "BaseCharacter.h"
 #include "CharacterManager.h"
+#include "TurnManager.h"
 #include <iostream>
 #include "Grid.h"
 using namespace std;
@@ -30,16 +31,18 @@ public:
 
 	void AlocateCharactersPositions();
 
-	//move the start game, start turn, end turn, handle turn to turn manager
-	//void StartGame();
+	bool isSetupComplete() { return m_isSetupComplete; }
 
-	//void StartTurn();
-
-	//void HandleTurn();
+	void StartGame();
 
 private:
 	CharacterManager m_characterManager;
 	Grid* m_grid{nullptr};
+	TurnManager m_turnManager;
+
+	bool m_isSetupComplete = false;
+	int m_gridLines = 5;
+	int m_gridCollumns = 5;
 };
 #endif // !Battlefield_h
 

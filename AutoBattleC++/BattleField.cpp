@@ -10,29 +10,22 @@
 using namespace std;
 
 void BattleField::Setup() {
-  
-    //initializing grid
-    //TODO make this random
-    m_grid = new Grid(5, 5);
-    //initializing all characters(player and enemy)
+    m_grid = new Grid(m_gridLines, m_gridCollumns);
     m_characterManager.initializePlayers();
-    //make a random number to get a box in the grid an set to player and enemy box positions
- 
 }
 
 void BattleField::GetPlayerChoice() {
-    //asks for the player to choose between for possible classes via console.
     cout << "Choose Between One of this Classes, type the number of the class\n";
 
     cout << "[1] Paladin, [2] Warrior, [3] Cleric, [4] Archer\n";
-    //store the player choice in a variable
+    
     int choice;  
     string name;
     cin >> choice;
 
     auto characterClass = getClass(choice);
   
-    auto player = m_characterManager.getPlayer();
+    auto *player = m_characterManager.getPlayer();
     player->setCharacterClassAndStatus(characterClass);
     cout << "Excelent! Your class is: " << player->getClassName() << "\n";
     cout << "Here are the class status.\n";
@@ -51,7 +44,8 @@ void BattleField::CreateEnemyCharacter() {
 
     string name;
     auto enemyClass = getClass(rand() % 4 + 1);
-    auto enemy = m_characterManager.getEnemy();
+    auto *enemy = m_characterManager.getEnemy();
+    m_characterManager.getAllCharacters().push_back(*enemy);
     enemy->setCharacterClassAndStatus(enemyClass);
     cout << "Enemy class is: " << enemy->getClassName() << "\n";
     cout << "Here are the class status.\n";
@@ -154,14 +148,21 @@ void BattleField::AlocateCharactersPositions() {
 
     auto player = m_characterManager.getPlayer();
     m_grid->getGridBoxes()[playerRandPos].setGridBoxOccupied(true);
+    m_grid->getGridBoxes()[playerRandPos].setGridBoxOccupiedByPlayer(true);
     player->setGridBox(m_grid->getGridBoxes()[playerRandPos]);
     
     auto enemy = m_characterManager.getEnemy();
     m_grid->getGridBoxes()[enemyRandPos].setGridBoxOccupied(true);
+    m_grid->getGridBoxes()[enemyRandPos].setGridBoxOccupiedByPlayer(false);
     enemy->setGridBox(m_grid->getGridBoxes()[enemyRandPos]);
 
     cout << "\n\n\n";
-    m_grid->drawBattlefield();
+    m_grid->drawBattlefieldWithIcons(player->getIcon(), enemy->getIcon());
+    cout << "\n\n";
+    cout << "Your positions are the class icons! Don't forget\n";
+    cout << "Your are: " << player->getIcon() << ", your enemy is: " << enemy->getIcon() << "!\n";
+    cout << "Let's fight!\n";
+    m_isSetupComplete = true;
 
     //int random = 0;
     //auto l_front = m_grid->grids.begin();
@@ -180,4 +181,8 @@ void BattleField::AlocateCharactersPositions() {
     //{
     //    AlocatePlayerCharacter();
     //}
+}
+
+void BattleField::StartGame() {
+    m_turnManager.startGame(*m_characterManager.getPlayer(), *m_characterManager.getEnemy(), *m_grid);
 }

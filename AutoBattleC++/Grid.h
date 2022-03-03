@@ -16,6 +16,10 @@ public:
     std::vector<GridBox> &getGridBoxes() { return m_gridBoxes; }
     GridBox getBoxWithIndex(int index) { return m_gridBoxes[index]; }
     void drawBattlefield();
+    void drawBattlefieldWithIcons(char characterIcon, char enemyIcon);
+
+    int getCollumns() { return m_collumns; }
+    int getLines() { return m_lines; }
 
 private:
     int m_lines = 0;

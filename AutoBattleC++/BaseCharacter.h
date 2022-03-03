@@ -1,6 +1,7 @@
 #ifndef BaseCharacter_h
 #define BaseCharacter_h
 #pragma once
+#include "Grid.h"
 #include "GridBox.h"
 #include <map>
 #include <string>
@@ -42,8 +43,7 @@ public:
     BaseCharacter() {};
     ~BaseCharacter() {};
 
-    void attack(BaseCharacter *target);
-    void moveTo(GridBox newGridBox);
+    void attack();
 
     void takeDamage(int damage);
     bool isCharacterDead();
@@ -76,6 +76,10 @@ public:
     void setCharacterClassAndStatus(CharacterClass characterClass);
 
     inline string getClassName() { return m_characterStatus[m_characterClass].ClassName; }
+
+    bool isCloseToTarget();
+    void moveToTarget(Grid &grid);
+    void createNewGridBox(int newX, int newY, int gridCollumns);
 
 protected:
     int m_health = 0;
