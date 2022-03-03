@@ -13,7 +13,7 @@ void BattleField::Setup() {
   
     //initializing grid
     //TODO make this random
-    m_grid = Grid(5, 5);
+    m_grid = new Grid(5, 5);
     //initializing all characters(player and enemy)
     m_characterManager.initializePlayers();
     //make a random number to get a box in the grid an set to player and enemy box positions
@@ -62,6 +62,7 @@ void BattleField::CreateEnemyCharacter() {
 
     cin >> name;
     cout << "You will fight against the might: " << name << "!\n";
+    AlocateCharactersPositions();
 }
 
 BaseCharacter::CharacterClass BattleField::getClass(int choice) {
@@ -140,8 +141,28 @@ BaseCharacter::CharacterClass BattleField::getClass(int choice) {
     //}
 //}
 
-void BattleField::AlocateCharactersPositions()
-{
+void BattleField::AlocateCharactersPositions() {
+
+    srand(time(NULL));
+    auto max = m_grid->getGridBoxes().size();
+    auto playerRandPos = rand() % max + 1;
+    auto enemyRandPos = rand() % max + 1;
+
+    if (enemyRandPos == playerRandPos) {
+        AlocateCharactersPositions();
+    }
+
+    auto player = m_characterManager.getPlayer();
+    m_grid->getGridBoxes()[playerRandPos].setGridBoxOccupied(true);
+    player->setGridBox(m_grid->getGridBoxes()[playerRandPos]);
+    
+    auto enemy = m_characterManager.getEnemy();
+    m_grid->getGridBoxes()[enemyRandPos].setGridBoxOccupied(true);
+    enemy->setGridBox(m_grid->getGridBoxes()[enemyRandPos]);
+
+    cout << "\n\n\n";
+    m_grid->drawBattlefield();
+
     //int random = 0;
     //auto l_front = m_grid->grids.begin();
     //advance(l_front, random);

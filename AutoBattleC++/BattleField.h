@@ -16,8 +16,8 @@ public:
 	//Character* PlayerCharacter;
 	//shared_ptr<Character>* EnemyCharacter;
 
-	int currentTurn;
-	int numberOfPossibleTiles;
+	int currentTurn = 0;
+	int numberOfPossibleTiles = 0;
 
 
 	void Setup();
@@ -39,7 +39,7 @@ public:
 
 private:
 	CharacterManager m_characterManager;
-	Grid m_grid;
+	Grid* m_grid{nullptr};
 };
 #endif // !Battlefield_h
 

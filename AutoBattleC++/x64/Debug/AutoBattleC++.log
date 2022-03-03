@@ -1,4 +1,5 @@
 ﻿  BattleField.cpp
-D:\GridBattlefield\AutoBattleC++\BattleField.cpp(52,15): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
-D:\GridBattlefield\AutoBattleC++\BattleField.cpp(88): warning C4715: 'BattleField::getClass': nem todos os caminhos de controle retornam um valor
+D:\GridBattlefield\AutoBattleC++\BattleField.cpp(50,15): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
+D:\GridBattlefield\AutoBattleC++\BattleField.cpp(146,15): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
+D:\GridBattlefield\AutoBattleC++\BattleField.cpp(86): warning C4715: 'BattleField::getClass': nem todos os caminhos de controle retornam um valor
   AutoBattleC++.vcxproj -> D:\GridBattlefield\AutoBattleC++\x64\Debug\AutoBattleC++.exe

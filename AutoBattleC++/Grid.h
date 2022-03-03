@@ -1,7 +1,7 @@
 #ifndef Grid_h
 #define Grid_h
 #pragma once
-
+#include <iostream>
 #include <Vector>
 #include "GridBox.h"
 
@@ -13,9 +13,8 @@ public:
     Grid() {  };
     ~Grid();
 
-    std::vector<GridBox> getGridBoxes() { return m_gridBoxes; }
-    GridBox getGridBoxWithIndex(int index);
-
+    std::vector<GridBox> &getGridBoxes() { return m_gridBoxes; }
+    GridBox getBoxWithIndex(int index) { return m_gridBoxes[index]; }
     void drawBattlefield();
 
 private:
