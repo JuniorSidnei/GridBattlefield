@@ -47,6 +47,29 @@ void BattleField::CreateEnemyCharacter() {
     auto *enemy = m_characterManager.getEnemy();
     m_characterManager.getAllCharacters().push_back(*enemy);
     enemy->setCharacterClassAndStatus(enemyClass);
+    
+    auto* player = m_characterManager.getPlayer();
+    auto playerClass = player->getClass();
+    if (enemyClass == playerClass) {
+        auto newEnemyIcon = 'p';
+
+        switch (playerClass) {
+        case BaseCharacter::CharacterClass::Archer:
+            newEnemyIcon = 'a';
+            break;
+        case BaseCharacter::CharacterClass::Cleric:
+            newEnemyIcon = 'c';
+            break;
+        case BaseCharacter::CharacterClass::Warrior:
+            newEnemyIcon = 'w';
+            break;
+        default:
+            break;
+        }
+
+        enemy->setIcon(newEnemyIcon);
+    }
+
     cout << "Enemy class is: " << enemy->getClassName() << "\n";
     cout << "Here are the class status.\n";
     cout << "HP: " << enemy->getHealth() << "\n";
@@ -76,6 +99,7 @@ BaseCharacter::CharacterClass BattleField::getClass(int choice) {
     default:
         printf("Choose a valid number class!\n");
         GetPlayerChoice();
+        break;
     }
 }
 
@@ -144,6 +168,7 @@ void BattleField::AlocateCharactersPositions() {
 
     if (enemyRandPos == playerRandPos) {
         AlocateCharactersPositions();
+        return;
     }
 
     auto player = m_characterManager.getPlayer();

@@ -76,6 +76,7 @@ public:
     void setCharacterClassAndStatus(CharacterClass characterClass);
 
     inline string getClassName() { return m_characterStatus[m_characterClass].ClassName; }
+    inline CharacterClass getClass() { return m_characterClass; }
 
     bool isCloseToTarget();
     void moveToTarget(Grid &grid);

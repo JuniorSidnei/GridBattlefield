@@ -15,7 +15,7 @@ Grid::Grid(int lines, int columns) {
     for (int i = 0; i < m_lines; i++) {
 
         for (int j = 0; j < m_collumns; j++) {
-            auto *newBox = new GridBox(i, j, false, false, (m_collumns * i + j));
+            auto *newBox = new GridBox(j, i, false, false, (m_collumns * i + j));
             m_gridBoxes.insert(m_gridBoxes.end(), *newBox);
             //std::cout << "grid box index: " << newBox.getGridIndex() << " \n";
         }
@@ -35,10 +35,10 @@ void Grid::drawBattlefield() {
             int gridPos = m_collumns * i + j;
             
             if (m_gridBoxes[gridPos].isGridBoxOccupied()) {
-                std::cout << "[X]\t";
+                std::cout << "[X] ";
             }
             else {
-                std::cout << "[ ]\t";
+                std::cout << "[ ] ";
             }
         }
         printf("\n");
@@ -53,14 +53,14 @@ void  Grid::drawBattlefieldWithIcons(char characterIcon, char enemyIcon) {
 
             if (m_gridBoxes[gridPos].isGridBoxOccupied()) {
                 if (m_gridBoxes[gridPos].isGridBoxOccupiedByPlayer()) {
-                    std::cout << "[" << characterIcon << "]\t";
+                    std::cout << "[" << characterIcon << "] ";
                 }
                 else {
-                    std::cout << "[" << enemyIcon << "]\t";
+                    std::cout << "[" << enemyIcon << "] ";
                 }
             }
             else {
-                std::cout << "[ ]\t";
+                std::cout << "[ ] ";
             }
         }
         printf("\n");

@@ -1,6 +1,7 @@
 #include "TurnManager.h"
 
 void TurnManager::startGame(BaseCharacter &playerCharacter, BaseCharacter &enemyCharacter, Grid &grid) {
+	cout << "The battle begins!\n";
 	m_gameState = GameStates::GameStarted;
 	//characterManager.sortAllPlayers();
 	//startTurn(characterManager.getAllCharacters()[0]);
@@ -13,19 +14,32 @@ void TurnManager::startGame(BaseCharacter &playerCharacter, BaseCharacter &enemy
 
 void TurnManager::startTurn() {
 	if (m_player.isCloseToTarget()) {
-		m_player.attack(m_player.getTarget());
+		cout << "Player attacked enemy\n";
+		m_player.attack();
 		nextTurn(m_enemy);
 	} 
 	else {
+		//no one is taking damage
+		cout << "Player moved to enemy\n";
 		m_player.moveToTarget(*m_grid);
+		m_grid->drawBattlefieldWithIcons(m_player.getIcon(), m_enemy.getIcon());
+		nextTurn(m_enemy);
+		getchar();
 	}
-
-	
-	//se não tiver mover na direção mais proxima
 }
 
-void TurnManager::nextTurn(BaseCharacter &character)
-{
+void TurnManager::nextTurn(BaseCharacter &character) {
+	m_currentTurn++;
+	cout << "The: " << m_currentTurn << " turn, has started!\n";
+	if (character.isCloseToTarget()) {
+		character.attack();
+		nextTurn(m_player);
+	}
+	else {
+		m_enemy.moveToTarget(*m_grid);
+		m_grid->drawBattlefieldWithIcons(m_player.getIcon(), m_enemy.getIcon());
+		getchar();
+	}
 }
 
 void TurnManager::endGame()

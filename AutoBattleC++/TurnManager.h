@@ -29,6 +29,7 @@ private:
 	BaseCharacter m_player;
 	BaseCharacter m_enemy;
 	Grid *m_grid{nullptr};
+	int m_currentTurn = 0;
 	GameStates m_gameState = GameStates::GameNotStarted;
 };
 

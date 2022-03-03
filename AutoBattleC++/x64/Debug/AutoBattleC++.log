@@ -1,12 +1,2 @@
-﻿  AutoBattleC++.cpp
-  BaseCharacter.cpp
-D:\GridBattlefield\AutoBattleC++\BaseCharacter.cpp(4,34): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
-  BattleField.cpp
-D:\GridBattlefield\AutoBattleC++\BattleField.cpp(43,15): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
-D:\GridBattlefield\AutoBattleC++\BattleField.cpp(140,15): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
-  Character.cpp
-  CharacterManager.cpp
-  TurnManager.cpp
-  Gerando Código...
-D:\GridBattlefield\AutoBattleC++\BattleField.cpp(80): warning C4715: 'BattleField::getClass': nem todos os caminhos de controle retornam um valor
+﻿  TurnManager.cpp
   AutoBattleC++.vcxproj -> D:\GridBattlefield\AutoBattleC++\x64\Debug\AutoBattleC++.exe
