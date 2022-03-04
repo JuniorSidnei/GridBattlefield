@@ -26,7 +26,6 @@ void BattleField::getPlayerChoice() {
 }
 
 void BattleField::showCharacterStatus() {
-    //srand(time(NULL));
 
     string playerName;
     string enemyName;

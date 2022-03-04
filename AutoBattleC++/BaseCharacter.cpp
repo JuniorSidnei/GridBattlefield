@@ -72,6 +72,25 @@ void BaseCharacter::moveToTarget(Grid &grid) {
 	auto newPositionX = currentPosition.first + m_directionPosition[currentDirection].first;
 	auto newPositionY = currentPosition.second + m_directionPosition[currentDirection].second;
 
+	if (m_characterType == CharacterType::Player) {
+		
+		auto pivot = targetPosition;
+		auto positionsToCheck = m_fourDirectionPositions;
+
+		for (auto& positionToCheck : positionsToCheck) {
+			auto x = pivot.first + positionToCheck.first;
+			auto y = pivot.second + positionToCheck.second;
+
+			if (newPositionX == x && newPositionY == y) {
+				std::cout << "Player stopped because next movement is in enemy range!\n";
+				grid.getGridBoxes()[m_gridBox.getGridIndex()].setGridBoxOccupied(true);
+				grid.getGridBoxes()[m_target->getGridBox().getGridIndex()].setGridBoxOccupied(true);
+				grid.getGridBoxes()[m_gridBox.getGridIndex()].setGridBoxOccupiedByPlayer(true);
+				return;
+			}
+		}
+	}
+
 	createNewGridBox(newPositionX, newPositionY, grid.getCollumns());
 
 	grid.getGridBoxes()[m_gridBox.getGridIndex()].setGridBoxOccupied(true);
@@ -136,8 +155,8 @@ BaseCharacter::DirectionToMove BaseCharacter::validateEightDirection(std::pair<i
 	}
 	else if (currentPosition.second < targetPosition.second) {
 		if (currentPosition.first == targetPosition.first) {
-			std::cout << "Player moved top\n";
-			return DirectionToMove::Top;
+			std::cout << "Player moved down\n";
+			return DirectionToMove::Down;
 		} else if (currentPosition.first > targetPosition.first) {
 			std::cout << "Player moved down left\n";
 			return DirectionToMove::Down_left;

@@ -10,6 +10,6 @@ int main() {
     }
 
     system("pause");
-    //delete battlefield
+    delete(battleField);
     return 0;
 }

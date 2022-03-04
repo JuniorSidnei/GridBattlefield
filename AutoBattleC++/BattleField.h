@@ -26,8 +26,8 @@ private:
 	TurnManager m_turnManager;
 
 	bool m_isSetupComplete = false;
-	int m_gridLines = 5;
-	int m_gridCollumns = 5;
+	int m_gridLines = 10;
+	int m_gridCollumns = 10;
 };
 #endif // !Battlefield_h
 

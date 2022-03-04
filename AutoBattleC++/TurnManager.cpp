@@ -4,19 +4,19 @@
 
 void TurnManager::handleTurn(Grid &grid, std::vector<std::unique_ptr<BaseCharacter>> &characters) {
 	if (m_gameState == GameStates::GameNotStarted) {
-		std::cout << "The battle begins!\n";
+		std::cout << "\n\n\n<<<<<<<<<<<<<<<<<<<<<<THE BATTLE BEGINS!>>>>>>>>>>>>>>>>>>>>>>\n\n\n";
 		m_gameState = GameStates::GameStarted;
 		std::random_shuffle(characters.begin(), characters.end());
 	}
 
-	std::cout << "Turn: " << m_currentTurn << ", starting now!\n";
+	std::cout << "\nTurn: " << m_currentTurn << ", starting now!\n";
 	for(auto &character : characters) {
 		if (character->isDead()) {
-			std::cout << "The battle is decided in turn: " << m_currentTurn << ", and the team winner is...\n";
+			std::cout << "\n\n\n<<<<The battle is decided in turn: " << m_currentTurn << ", and the team winner is...>>>>\n";
 			if (character->getType() == BaseCharacter::CharacterType::Player) {
-				std::cout << "ENEMY TEAM WON!\n";
+				std::cout << "<<<<<<<<<<<ENEMY TEAM WON!>>>>>>>>>>>\n";
 			} else {
-				std::cout << "PLAYER TEAM WON!\n";
+				std::cout << "<<<<<<<<<<<PLAYER TEAM WON!>>>>>>>>>>>\n";
 			}
 			endGame();
 			return;
