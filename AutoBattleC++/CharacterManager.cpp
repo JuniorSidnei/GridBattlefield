@@ -15,11 +15,8 @@ void CharacterManager::initializePlayers() {
 
 	m_playerCharacter->setTarget(m_enemyCharacter.get());
 	m_enemyCharacter->setTarget(m_playerCharacter.get());
-
-	//m_allCharacters.push_back(*m_playerCharacter);
-	//m_allCharacters.push_back(*m_enemyCharacter);
 }
 
-void CharacterManager::sortAllPlayers() {
-	std::random_shuffle(m_allCharacters.begin(), m_allCharacters.end());
+void CharacterManager::insertCharacter(BaseCharacter& character) {
+	m_allCharacters.push_back(character);
 }

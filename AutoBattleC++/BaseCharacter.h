@@ -46,7 +46,7 @@ public:
     void attack();
 
     void takeDamage(int damage);
-    bool isCharacterDead();
+    bool isDead();
 
     inline int getHealth() { return m_health; }
     inline void setHealth(int health) { m_health = health; }

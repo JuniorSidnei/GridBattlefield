@@ -29,6 +29,11 @@ Grid::~Grid()
 
 }
 
+void Grid::setCharactersIcons(char playerIcon, char enemyIcon) {
+    m_playerIcon = playerIcon;
+    m_enemyIcon = enemyIcon;
+}
+
 void Grid::drawBattlefield() {
     for (int i = 0; i < m_lines; i++) {
         for (int j = 0; j < m_collumns; j++) {
@@ -46,17 +51,17 @@ void Grid::drawBattlefield() {
     printf("\n");
 }
 
-void  Grid::drawBattlefieldWithIcons(char characterIcon, char enemyIcon) {
+void  Grid::drawBattlefieldWithIcons() {
     for (int i = 0; i < m_lines; i++) {
         for (int j = 0; j < m_collumns; j++) {
             int gridPos = m_collumns * i + j;
 
             if (m_gridBoxes[gridPos].isGridBoxOccupied()) {
                 if (m_gridBoxes[gridPos].isGridBoxOccupiedByPlayer()) {
-                    std::cout << "[" << characterIcon << "] ";
+                    std::cout << "[" << m_playerIcon << "] ";
                 }
                 else {
-                    std::cout << "[" << enemyIcon << "] ";
+                    std::cout << "[" << m_enemyIcon << "] ";
                 }
             }
             else {

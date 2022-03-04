@@ -8,7 +8,7 @@ void BaseCharacter::takeDamage(int damage) {
 	m_health -= damage;
 }
 
-bool BaseCharacter::isCharacterDead() {
+bool BaseCharacter::isDead() {
 	return m_health <= 0;
 }
 

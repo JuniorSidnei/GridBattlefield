@@ -1,47 +1,66 @@
 #include "TurnManager.h"
+#include <algorithm>
+#include <iostream>
 
-void TurnManager::startGame(BaseCharacter &playerCharacter, BaseCharacter &enemyCharacter, Grid &grid) {
+void TurnManager::startGame(Grid &grid, std::vector<BaseCharacter> &characters) {
 	cout << "The battle begins!\n";
 	m_gameState = GameStates::GameStarted;
-	//characterManager.sortAllPlayers();
-	//startTurn(characterManager.getAllCharacters()[0]);
-	//TODO make this random between the characters
-	m_player = playerCharacter;
-	m_enemy = enemyCharacter;
+	m_characters = characters;
+	std::random_shuffle(m_characters.begin(), m_characters.end());
 	m_grid = &grid;
-	startTurn();
+	handleTurn();
 }
 
-void TurnManager::startTurn() {
-	if (m_player.isCloseToTarget()) {
-		cout << "Player attacked enemy\n";
-		m_player.attack();
-		nextTurn(m_enemy);
-	} 
-	else {
-		//no one is taking damage
-		cout << "Player moved to enemy\n";
-		m_player.moveToTarget(*m_grid);
-		m_grid->drawBattlefieldWithIcons(m_player.getIcon(), m_enemy.getIcon());
-		nextTurn(m_enemy);
-		getchar();
+void TurnManager::handleTurn() {
+	cout << "Turn: " << m_currentTurn << ", starting now!\n";
+	for(auto character : m_characters) {
+		if (character.isDead()) {
+			auto type = character.getType();
+			if (type == BaseCharacter::CharacterType::Player) {
+				cout << "ENEMY TEAM WON!\n";
+			} else {
+				cout << "PLAYER TEAM WON!\n";
+			}
+			endGame();
+			return;
+		}
+
+		if (character.isCloseToTarget()) {
+			cout << "Character attacked enemy\n";
+			character.attack();
+		}
+		else {
+			cout << "Character moved to enemy\n";
+			character.moveToTarget(*m_grid);
+			m_grid->drawBattlefieldWithIcons();
+		}
 	}
-}
 
-void TurnManager::nextTurn(BaseCharacter &character) {
 	m_currentTurn++;
-	cout << "The: " << m_currentTurn << " turn, has started!\n";
-	if (character.isCloseToTarget()) {
-		character.attack();
-		nextTurn(m_player);
-	}
-	else {
-		m_enemy.moveToTarget(*m_grid);
-		m_grid->drawBattlefieldWithIcons(m_player.getIcon(), m_enemy.getIcon());
-		getchar();
-	}
+	system("pause");
+	handleTurn();
+
+	//if (m_characters[0].isCloseToTarget()) {
+	//	
+	//	m_characters[1].attack();
+	//	nextTurn(m_characters[1]);
+	//} 
+	//else {
+	//	//no one is taking damage
+	//	
+	//	m_characters[0].moveToTarget(*m_grid);
+	//	if (m_characters[0].getType() == BaseCharacter::CharacterType::Player) {
+	//		m_grid->drawBattlefieldWithIcons(m_characters[0].getIcon(), m_characters[1].getIcon());
+	//	}
+	//	else {
+	//		m_grid->drawBattlefieldWithIcons(m_characters[1].getIcon(), m_characters[0].getIcon());
+	//	}
+	//	
+	//	nextTurn(m_characters[1]);
+	//	getchar();
+	//}
 }
 
-void TurnManager::endGame()
-{
+void TurnManager::endGame() {
+	cout << "The battle has ended! Thanks!\n";
 }

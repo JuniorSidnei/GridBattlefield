@@ -12,32 +12,24 @@ public:
 
 	BattleField(){};
 
-	//list<BaseCharacter>* AllPlayers;
-	//shared_ptr<Character> PlayerCharacter;
-	//Character* PlayerCharacter;
-	//shared_ptr<Character>* EnemyCharacter;
+	void setup();
 
-	int currentTurn = 0;
-	int numberOfPossibleTiles = 0;
-
-
-	void Setup();
-
-	void GetPlayerChoice();
+	void getPlayerChoice();
 
 	BaseCharacter::CharacterClass getClass(int choice);
 	
-	void CreateEnemyCharacter();
+	void createEnemyCharacter();
 
-	void AlocateCharactersPositions();
+	void alocateCharactersPositions();
 
 	bool isSetupComplete() { return m_isSetupComplete; }
 
-	void StartGame();
+	void startGame();
 
 private:
 	CharacterManager m_characterManager;
 	Grid* m_grid{nullptr};
+	std::vector<BaseCharacter> m_allCharacters;
 	TurnManager m_turnManager;
 
 	bool m_isSetupComplete = false;

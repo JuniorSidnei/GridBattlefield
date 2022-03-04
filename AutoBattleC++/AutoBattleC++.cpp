@@ -6,14 +6,15 @@
 int main()
 {
     BattleField* battleField = new(BattleField);
-    battleField->Setup();
-    battleField->GetPlayerChoice();
+    battleField->setup();
+    battleField->getPlayerChoice();
 
     if (battleField->isSetupComplete()) {
-        battleField->StartGame();
+        battleField->startGame();
     }
 
-    getchar(); 
+    system("pause");
+    return 0;
 }
 
 

@@ -13,22 +13,16 @@ public:
 	enum class GameStates {
 		GameNotStarted = 0,
 		GameStarted = 1,
-		PlayerTurn = 2,
-		EnemyTurn = 3,
-		GameEnded = 4
+		GameEnded = 2
 	};
 
-	void startGame(BaseCharacter& playerCharacter, BaseCharacter& enemyCharacter, Grid &grid);
-	void startTurn();
-	void nextTurn(BaseCharacter &character);
+	void startGame(Grid &grid, std::vector<BaseCharacter>& characters);
+	void handleTurn();
 	void endGame();
 
 private:
-	//TODO change this to be the vector instead of two characters
-	std::vector<BaseCharacter> m_allCharacters;
-	BaseCharacter m_player;
-	BaseCharacter m_enemy;
 	Grid *m_grid{nullptr};
+	std::vector<BaseCharacter> m_characters;
 	int m_currentTurn = 0;
 	GameStates m_gameState = GameStates::GameNotStarted;
 };
