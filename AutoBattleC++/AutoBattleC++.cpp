@@ -6,7 +6,6 @@
 int main()
 {
     BattleField* battleField = new(BattleField);
-    battleField->setup();
     battleField->getPlayerChoice();
 
     if (battleField->isSetupComplete()) {

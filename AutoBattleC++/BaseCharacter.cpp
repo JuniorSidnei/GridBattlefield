@@ -62,10 +62,6 @@ void BaseCharacter::moveToTarget(Grid &grid) {
 	}
 
 	if (m_target->getGridBox().getPositionX() > m_gridBox.getPositionX()) {
-		//a nova posição do grid é o mesmo calculo:
-		//coluna * x + y
-		//i = coluna
-		//j = linha
 		createNewGridBox(m_gridBox.getPositionX() + 1, m_gridBox.getPositionY(), grid.getCollumns());
 		cout << "Character moved right\n\n";
 	}

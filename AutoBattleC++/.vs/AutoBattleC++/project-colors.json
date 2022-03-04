@@ -5,6 +5,11 @@
       "ProjectGuid": "729ed636-22c6-4e09-999a-7316babbe462",
       "DisplayName": "AutoBattleC++",
       "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Arquivos Diversos",
+      "ColorIndex": -1
     }
   },
   "NextColorIndex": 1

@@ -16,13 +16,10 @@ public:
 		GameEnded = 2
 	};
 
-	void startGame(Grid &grid, std::vector<BaseCharacter>& characters);
-	void handleTurn();
+	void handleTurn(Grid& grid, std::vector<std::unique_ptr<BaseCharacter>>& characters);
 	void endGame();
 
 private:
-	Grid *m_grid{nullptr};
-	std::vector<BaseCharacter> m_characters;
 	int m_currentTurn = 0;
 	GameStates m_gameState = GameStates::GameNotStarted;
 };

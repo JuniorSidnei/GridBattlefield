@@ -1,24 +1,23 @@
 #include "CharacterManager.h"
 #include <algorithm>
 
-CharacterManager::~CharacterManager() {
-	delete(m_playerCharacter.get());
-	delete(m_enemyCharacter.get());
-}
+CharacterManager::~CharacterManager() { }
 
 void CharacterManager::initializeCharacters(BaseCharacter::CharacterClass playerClass, BaseCharacter::CharacterClass enemyClass, Grid &grid) {
     srand(time(NULL));
 
-    m_playerCharacter = std::make_unique<BaseCharacter>();
-	m_playerCharacter->setCharacterType(BaseCharacter::CharacterType::Player);
-	m_playerCharacter->setCharacterClassAndStatus(playerClass);
+    m_playerIndex = m_allCharacters.size();
+    m_allCharacters.emplace_back(std::make_unique<BaseCharacter>());
+    m_allCharacters[m_playerIndex]->setCharacterType(BaseCharacter::CharacterType::Player);
+    m_allCharacters[m_playerIndex]->setCharacterClassAndStatus(playerClass);
 	
-	m_enemyCharacter = std::make_unique<BaseCharacter>();
-	m_enemyCharacter->setCharacterType(BaseCharacter::CharacterType::Enemy);
-    m_enemyCharacter->setCharacterClassAndStatus(enemyClass);
+    m_enemyIndex = m_allCharacters.size();
+    m_allCharacters.emplace_back(std::make_unique<BaseCharacter>());
+    m_allCharacters[m_enemyIndex]->setCharacterType(BaseCharacter::CharacterType::Enemy);
+    m_allCharacters[m_enemyIndex]->setCharacterClassAndStatus(enemyClass);
 
-	m_playerCharacter->setTarget(m_enemyCharacter.get());
-	m_enemyCharacter->setTarget(m_playerCharacter.get());
+    m_allCharacters[m_playerIndex]->setTarget(m_allCharacters[m_enemyIndex].get());
+    m_allCharacters[m_enemyIndex]->setTarget(m_allCharacters[m_playerIndex].get());
 
     changeEnemyIconIfNeeded(playerClass, enemyClass);
 	
@@ -26,16 +25,12 @@ void CharacterManager::initializeCharacters(BaseCharacter::CharacterClass player
 
     grid.getBoxWithIndex(gridPositions.first).setGridBoxOccupied(true);
     grid.getBoxWithIndex(gridPositions.first).setGridBoxOccupiedByPlayer(true);
-    m_playerCharacter->setGridBox(grid.getBoxWithIndex(gridPositions.first));
+    m_allCharacters[m_playerIndex]->setGridBox(grid.getBoxWithIndex(gridPositions.first));
 
     grid.getBoxWithIndex(gridPositions.second).setGridBoxOccupied(true);
-    m_enemyCharacter->setGridBox(grid.getBoxWithIndex(gridPositions.second));
+    m_allCharacters[m_enemyIndex]->setGridBox(grid.getBoxWithIndex(gridPositions.second));
 
-    grid.setCharactersIcons(m_playerCharacter->getIcon(), m_enemyCharacter->getIcon());
-}
-
-void CharacterManager::insertCharacter(BaseCharacter& character) {
-	m_allCharacters.push_back(character);
+    grid.setCharactersIcons(m_allCharacters[m_playerIndex]->getIcon(), m_allCharacters[m_enemyIndex]->getIcon());
 }
 
 void CharacterManager::changeEnemyIconIfNeeded(BaseCharacter::CharacterClass playerClass, BaseCharacter::CharacterClass enemyClass) {
@@ -56,7 +51,7 @@ void CharacterManager::changeEnemyIconIfNeeded(BaseCharacter::CharacterClass pla
             break;
         }
 
-        m_enemyCharacter->setIcon(newEnemyIcon);
+        m_allCharacters[m_enemyIndex]->setIcon(newEnemyIcon);
     }
 }
 
