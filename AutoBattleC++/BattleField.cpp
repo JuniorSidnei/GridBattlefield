@@ -11,7 +11,7 @@ using namespace std;
 
 void BattleField::setup() {
     m_grid = new Grid(m_gridLines, m_gridCollumns);
-    m_characterManager.initializePlayers();
+    //m_characterManager.initializePlayers();
 }
 
 void BattleField::getPlayerChoice() {
@@ -24,10 +24,13 @@ void BattleField::getPlayerChoice() {
     cin >> choice;
 
     auto characterClass = getClass(choice);
+    auto enemyClass = getClass(rand() % 4 + 1);
+    m_characterManager.initializeCharacters(characterClass, enemyClass, *m_grid);
+
   
     auto *player = m_characterManager.getPlayer();
-    player->setCharacterClassAndStatus(characterClass);
-    m_characterManager.insertCharacter(*player);
+    //player->setCharacterClassAndStatus(characterClass);
+    //m_characterManager.insertCharacter(*player);
     cout << "Excelent! Your class is: " << player->getClassName() << "\n";
     cout << "Here are the class status.\n";
     cout << "HP: " << player->getHealth() << "\n";
@@ -41,16 +44,16 @@ void BattleField::getPlayerChoice() {
 }
 
 void BattleField::createEnemyCharacter() {
-    srand(time(NULL));
+    //srand(time(NULL));
 
     string name;
-    auto enemyClass = getClass(rand() % 4 + 1);
+    //auto enemyClass = getClass(rand() % 4 + 1);
     auto *enemy = m_characterManager.getEnemy();
-    enemy->setCharacterClassAndStatus(enemyClass);
-    m_characterManager.insertCharacter(*enemy);
-    auto* player = m_characterManager.getPlayer();
-    auto playerClass = player->getClass();
-    if (enemyClass == playerClass) {
+    //enemy->setCharacterClassAndStatus(enemyClass);
+    //m_characterManager.insertCharacter(*enemy);
+    //auto* player = m_characterManager.getPlayer();
+    //auto playerClass = player->getClass();
+    /*if (enemyClass == playerClass) {
         auto newEnemyIcon = 'p';
 
         switch (playerClass) {
@@ -68,7 +71,7 @@ void BattleField::createEnemyCharacter() {
         }
 
         enemy->setIcon(newEnemyIcon);
-    }
+    }*/
 
     cout << "Enemy class is: " << enemy->getClassName() << "\n";
     cout << "Here are the class status.\n";
@@ -105,28 +108,32 @@ BaseCharacter::CharacterClass BattleField::getClass(int choice) {
 
 void BattleField::alocateCharactersPositions() {
 
-    srand(time(NULL));
-    auto max = m_grid->getGridBoxes().size();
+    /*srand(time(NULL));
+    auto max = m_grid->getGridBoxes().size() - 1;
     auto playerRandPos = rand() % max + 1;
     auto enemyRandPos = rand() % max + 1;
 
     if (enemyRandPos == playerRandPos) {
         alocateCharactersPositions();
         return;
-    }
+    }*/
 
-    auto player = m_characterManager.getPlayer();
-    m_grid->getGridBoxes()[playerRandPos].setGridBoxOccupied(true);
-    m_grid->getGridBoxes()[playerRandPos].setGridBoxOccupiedByPlayer(true);
-    player->setGridBox(m_grid->getGridBoxes()[playerRandPos]);
+    auto *player = m_characterManager.getPlayer();
+    auto *enemy = m_characterManager.getEnemy();
+    //m_grid->getGridBoxes()[playerRandPos].setGridBoxOccupied(true);
+    //m_grid->getGridBoxes()[playerRandPos].setGridBoxOccupiedByPlayer(true);
+    //m_grid->getBoxWithIndex(playerRandPos).setGridBoxOccupied(true);
+    //m_grid->getBoxWithIndex(playerRandPos).setGridBoxOccupiedByPlayer(true);
+    //player->setGridBox(m_grid->getGridBoxes()[playerRandPos]);
+    //player->setGridBox(m_grid->getBoxWithIndex(playerRandPos));
     
-    auto enemy = m_characterManager.getEnemy();
+    /*auto *enemy = m_characterManager.getEnemy();
     m_grid->getGridBoxes()[enemyRandPos].setGridBoxOccupied(true);
     m_grid->getGridBoxes()[enemyRandPos].setGridBoxOccupiedByPlayer(false);
-    enemy->setGridBox(m_grid->getGridBoxes()[enemyRandPos]);
+    enemy->setGridBox(m_grid->getGridBoxes()[enemyRandPos]);*/
 
     cout << "\n\n\n";
-    m_grid->setCharactersIcons(player->getIcon(), enemy->getIcon());
+    //m_grid->setCharactersIcons(player->getIcon(), enemy->getIcon());
     m_grid->drawBattlefieldWithIcons();
     cout << "\n\n";
     cout << "Your positions are the class icons! Don't forget\n";

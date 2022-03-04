@@ -1,5 +1,33 @@
-﻿  BattleField.cpp
-D:\GridBattlefield\AutoBattleC++\BattleField.cpp(44,15): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
-D:\GridBattlefield\AutoBattleC++\BattleField.cpp(164,15): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
-D:\GridBattlefield\AutoBattleC++\BattleField.cpp(104): warning C4715: 'BattleField::getClass': nem todos os caminhos de controle retornam um valor
+﻿  AutoBattleC++.cpp
+  BaseCharacter.cpp
+D:\GridBattlefield\AutoBattleC++\BaseCharacter.cpp(4,36): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
+  BattleField.cpp
+  Character.cpp
+  CharacterManager.cpp
+D:\GridBattlefield\AutoBattleC++\CharacterManager.cpp(10,15): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
+D:\GridBattlefield\AutoBattleC++\CharacterManager.cpp(64,15): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\include\utility(247,16): warning C4244: 'inicializando': conversão de '_Ty' para '_Ty1', possível perda de dados
+          with
+          [
+              _Ty=unsigned __int64
+          ]
+          and
+          [
+              _Ty1=int
+          ]
+D:\GridBattlefield\AutoBattleC++\CharacterManager.cpp(74): message : consulte a referência à instanciação 'std::pair<int,int>::pair<unsigned __int64,unsigned __int64,0>(std::pair<unsigned __int64,unsigned __int64> &&) noexcept' do modelo que está sendo compilada
+D:\GridBattlefield\AutoBattleC++\CharacterManager.cpp(74): message : consulte a referência à instanciação 'std::pair<int,int>::pair<unsigned __int64,unsigned __int64,0>(std::pair<unsigned __int64,unsigned __int64> &&) noexcept' do modelo que está sendo compilada
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.30.30705\include\utility(247,61): warning C4244: 'inicializando': conversão de '_Ty' para '_Ty2', possível perda de dados
+          with
+          [
+              _Ty=unsigned __int64
+          ]
+          and
+          [
+              _Ty2=int
+          ]
+  Grid.cpp
+  TurnManager.cpp
+  Gerando Código...
+D:\GridBattlefield\AutoBattleC++\BattleField.cpp(107): warning C4715: 'BattleField::getClass': nem todos os caminhos de controle retornam um valor
   AutoBattleC++.vcxproj -> D:\GridBattlefield\AutoBattleC++\x64\Debug\AutoBattleC++.exe

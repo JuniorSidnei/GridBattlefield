@@ -14,7 +14,7 @@ public:
     ~Grid();
 
     std::vector<GridBox> &getGridBoxes() { return m_gridBoxes; }
-    GridBox getBoxWithIndex(int index) { return m_gridBoxes[index]; }
+    GridBox &getBoxWithIndex(int index) { return m_gridBoxes[index]; }
     void setCharactersIcons(char playerIcon, char enemyIcon);
     void drawBattlefield();
     void drawBattlefieldWithIcons();
