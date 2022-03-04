@@ -21,8 +21,26 @@ void BaseCharacter::setCharacterClassAndStatus(CharacterClass characterClass) {
 } 
 
 bool BaseCharacter::isCloseToTarget() {
-	//refactor this to use the maps instead of a bunch of ifs
-	if (m_gridBox.getPositionX() +1 == m_target->getGridBox().getPositionX()) {
+	auto pivot = m_gridBox.getPositionXY();
+	auto positionsToCheck = m_fourDirectionPositions;
+
+	if (m_characterType == CharacterType::Player) {
+		positionsToCheck = m_eightDirectionPositions;
+	}
+
+	for (auto &positionToCheck : positionsToCheck) {
+		auto x = pivot.first + positionToCheck.first;
+		auto y = pivot.second + positionToCheck.second;
+
+		auto position = std::make_pair(x, y);
+		if (checkPosition(position)) {
+			return true;
+		} 
+	}
+	
+	return false;
+
+	/*if (m_gridBox.getPositionX() +1 == m_target->getGridBox().getPositionX()) {
 		if (m_gridBox.getPositionY() == m_target->getGridBox().getPositionY()) {
 			return true;
 		}
@@ -48,7 +66,7 @@ bool BaseCharacter::isCloseToTarget() {
 			return false;
 		}
 	}
-	return false;
+	return false;*/
 }
 
 void BaseCharacter::moveToTarget(Grid &grid) {
@@ -64,18 +82,18 @@ void BaseCharacter::moveToTarget(Grid &grid) {
 
 	if (m_target->getGridBox().getPositionX() > m_gridBox.getPositionX()) {
 		createNewGridBox(m_gridBox.getPositionX() + 1, m_gridBox.getPositionY(), grid.getCollumns());
-		cout << "Character moved right\n\n";
+		std::cout << "Character moved right\n\n";
 	}
 	else if (m_target->getGridBox().getPositionX() < m_gridBox.getPositionX()) {
 		createNewGridBox(m_gridBox.getPositionX() - 1, m_gridBox.getPositionY(), grid.getCollumns());
-		cout << "Character moved left\n\n";
+		std::cout << "Character moved left\n\n";
 	}
 	else if (m_target->getGridBox().getPositionY() > m_gridBox.getPositionY()) {
 		createNewGridBox(m_gridBox.getPositionX(), m_gridBox.getPositionY() + 1, grid.getCollumns());
-		cout << "Character moved up\n\n";
+		std::cout << "Character moved up\n\n";
 	} else if (m_target->getGridBox().getPositionY() < m_gridBox.getPositionY()) {
 		createNewGridBox(m_gridBox.getPositionX(), m_gridBox.getPositionY() - 1, grid.getCollumns());
-		cout << "Character moved down\n\n";
+		std::cout << "Character moved down\n\n";
 	}
 
 	grid.getGridBoxes()[m_gridBox.getGridIndex()].setGridBoxOccupied(true);
@@ -92,5 +110,13 @@ void BaseCharacter::createNewGridBox(int newX, int newY, int gridCollumns) {
 	m_target->getGridBox().setGridBoxOccupied(false);
 	auto* newBox = new GridBox(newX, newY, true, isPlayer, (gridCollumns * newY + newX));
 	m_gridBox = *newBox;
+}
+
+bool BaseCharacter::checkPosition(std::pair<int, int> &position) {
+	if (position.first == m_target->getGridBox().getPositionX() &&
+		position.second == m_target->getGridBox().getPositionY()) {
+		return true;
+	}
+	return false;
 }
 

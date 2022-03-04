@@ -1,6 +1,4 @@
 #include "Grid.h"
-#include "Types.h"
-
 
 Grid::Grid(int lines, int columns) {
 

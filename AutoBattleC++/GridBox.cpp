@@ -7,3 +7,4 @@ GridBox::GridBox(int positionX, int positionY, bool isPositionOccupied, bool isP
     m_isPlayerCharacter = isPlayerCharacter;
     m_indexPosition = indexPosition;
 }
+

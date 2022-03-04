@@ -1,2 +1,3 @@
-﻿  TurnManager.cpp
+﻿  BaseCharacter.cpp
+D:\GridBattlefield\AutoBattleC++\BaseCharacter.cpp(4,36): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
   AutoBattleC++.vcxproj -> D:\GridBattlefield\AutoBattleC++\x64\Debug\AutoBattleC++.exe

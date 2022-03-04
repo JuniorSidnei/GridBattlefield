@@ -1,7 +1,7 @@
 #ifndef GridBox_h
 #define GridBox_h
 #pragma once
-
+#include <iostream>
 class GridBox {
 public:
     GridBox(int positionX, int positionY, bool isPositionOccupied, bool isPlayerCharacter, int indexPosition);
@@ -20,7 +20,9 @@ public:
     inline void setPositionX(int newPos) { m_positionX = newPos; }
 
     inline int getPositionY() { return m_positionY; }
-    inline void setPositionY(int newPos) { m_positionY = newPos; }    
+    inline void setPositionY(int newPos) { m_positionY = newPos; }
+
+    std::pair<int, int> getPositionXY() { return std::make_pair(m_positionX, m_positionY); }
 
 private:
     int m_positionX = 0;

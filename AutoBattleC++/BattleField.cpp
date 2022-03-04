@@ -1,7 +1,5 @@
 #include "Grid.h"
 #include "BattleField.h"
-#include "Types.h"
-#include "Character.h"
 #include <iostream>
 #include "BattleField.h"
 #include <list>
