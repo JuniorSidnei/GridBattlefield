@@ -1,3 +1,5 @@
 ﻿  BaseCharacter.cpp
 D:\GridBattlefield\AutoBattleC++\BaseCharacter.cpp(4,36): warning C4244: 'argumento': conversão de 'float' para 'int', possível perda de dados
+D:\GridBattlefield\AutoBattleC++\BaseCharacter.cpp(156): warning C4715: 'BaseCharacter::validateFourDirection': nem todos os caminhos de controle retornam um valor
+D:\GridBattlefield\AutoBattleC++\BaseCharacter.cpp(140): warning C4715: 'BaseCharacter::validateEightDirection': nem todos os caminhos de controle retornam um valor
   AutoBattleC++.vcxproj -> D:\GridBattlefield\AutoBattleC++\x64\Debug\AutoBattleC++.exe

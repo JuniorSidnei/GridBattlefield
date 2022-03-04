@@ -22,6 +22,17 @@ public:
         Archer = 4
     };
 
+    enum class DirectionToMove {
+        Left = 0,
+        Top_left = 1,
+        Top = 2,
+        Top_right = 3,
+        Right = 4,
+        Down_right = 5,
+        Down = 6,
+        Down_left = 7,
+    };
+
     struct CharacterStatus {
         int Health = 0;
         float BaseDamage = 0;
@@ -86,7 +97,8 @@ public:
 
 private:
     bool checkPosition(std::pair<int, int> &position);
-    
+    DirectionToMove validateEightDirection(std::pair<int, int> &targetPosition, std::pair<int, int> &currentPosition);
+    DirectionToMove validateFourDirection(std::pair<int, int> &targetPosition, std::pair<int, int> &currentPosition);
 
 protected:
     int m_health = 0;
@@ -123,6 +135,17 @@ protected:
         { CharacterClass::Archer, CharacterStatus(150, 35.0f, 1.5f, 'A', "Archer")},
         { CharacterClass::Warrior, CharacterStatus(350, 30.0f, 1.2f, 'W', "Warrior")},
         { CharacterClass::Cleric, CharacterStatus(200, 20.0f, 1.3f, 'C', "Cleric")}
+    };
+
+    std::map<DirectionToMove, std::pair<int, int>> m_directionPosition {
+        { DirectionToMove::Left,        std::make_pair(-1,  0) },
+        { DirectionToMove::Top_left,    std::make_pair(-1,  1) },
+        { DirectionToMove::Top,         std::make_pair(0,   1) },
+        { DirectionToMove::Top_right,   std::make_pair(1,   1) },
+        { DirectionToMove::Right,       std::make_pair(0,   1) },
+        { DirectionToMove::Down_right,  std::make_pair(1,  -1) },
+        { DirectionToMove::Down,        std::make_pair(0,  -1) },
+        { DirectionToMove::Down_left,   std::make_pair(-1, -1) },
     };
 };
 #endif
