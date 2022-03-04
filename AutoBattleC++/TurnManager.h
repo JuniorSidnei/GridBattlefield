@@ -20,7 +20,7 @@ public:
 	void endGame();
 
 private:
-	int m_currentTurn = 0;
+	int m_currentTurn = 1;
 	GameStates m_gameState = GameStates::GameNotStarted;
 };
 

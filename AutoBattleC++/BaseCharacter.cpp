@@ -21,13 +21,14 @@ void BaseCharacter::setCharacterClassAndStatus(CharacterClass characterClass) {
 } 
 
 bool BaseCharacter::isCloseToTarget() {
+	//refactor this to use the maps instead of a bunch of ifs
 	if (m_gridBox.getPositionX() +1 == m_target->getGridBox().getPositionX()) {
 		if (m_gridBox.getPositionY() == m_target->getGridBox().getPositionY()) {
 			return true;
-		} else {
+		}
+		else {
 			return false;
 		}
-		
 	} else if (m_gridBox.getPositionX() -1 == m_target->getGridBox().getPositionX()) {
 		if (m_gridBox.getPositionY() == m_target->getGridBox().getPositionY()) {
 			return true;

@@ -3,7 +3,7 @@
 #include <iostream>
 
 void TurnManager::handleTurn(Grid &grid, std::vector<std::unique_ptr<BaseCharacter>> &characters) {
-	if (m_currentTurn == 0) {
+	if (m_gameState == GameStates::GameNotStarted) {
 		cout << "The battle begins!\n";
 		m_gameState = GameStates::GameStarted;
 		std::random_shuffle(characters.begin(), characters.end());
@@ -39,5 +39,6 @@ void TurnManager::handleTurn(Grid &grid, std::vector<std::unique_ptr<BaseCharact
 }
 
 void TurnManager::endGame() {
+	m_gameState = GameStates::GameEnded;
 	cout << "The battle has ended! Thanks!\n";
 }

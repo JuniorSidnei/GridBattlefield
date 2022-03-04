@@ -94,6 +94,23 @@ protected:
     BaseCharacter* m_target = nullptr;
     GridBox m_gridBox;
 
+    std::vector<std::pair<int, int>> m_fourDirectionPositions = {
+        {-1, 0}, 
+        {0,  1}, 
+        {0,  1}, 
+        {0, -1} 
+    };
+
+    std::vector<std::pair<int, int>> m_eightDirectionPositions = {
+        {-1,   0}, //left
+        {-1,   1}, //top_left
+        {0,    1}, //top
+        {1,    1}, //top_right
+        {0,    1}, //right
+        {1,   -1}, //down_right
+        {0,   -1}, //down
+        {-1,  -1} //down_left
+    };
 
     map<CharacterClass, CharacterStatus> m_characterStatus {
         { CharacterClass::Paladin, CharacterStatus(250, 25.0f, 1.2f, 'P', "Paladin")},
