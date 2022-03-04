@@ -1,11 +1,13 @@
 #include "BaseCharacter.h"
 
 void BaseCharacter::attack() {
+	std::cout << "<<< " << getCharacterType(m_characterType) << " " << getClassName() << " attacked!\n";
 	m_target->takeDamage(m_baseDamage * m_damageMultiplier);
 }
 
 void BaseCharacter::takeDamage(int damage) {
 	m_health -= damage;
+	if (m_health <= 0) m_health = 0;
 }
 
 bool BaseCharacter::isDead() {
@@ -19,6 +21,13 @@ void BaseCharacter::setCharacterClassAndStatus(CharacterClass characterClass) {
 	m_damageMultiplier = m_characterStatus[m_characterClass].DamageMultiplier;
 	m_icon= m_characterStatus[m_characterClass].Icon;
 } 
+
+std::string BaseCharacter::getCharacterType(CharacterType type) {
+	if (type == CharacterType::Player) {
+		return "Player";
+	}
+	return "Enemy";
+}
 
 bool BaseCharacter::isCloseToTarget() {
 	auto pivot = m_gridBox.getPositionXY();
@@ -95,10 +104,10 @@ BaseCharacter::DirectionToMove BaseCharacter::validateEightDirection(std::pair<i
 			return DirectionToMove::Left;
 		} else if (currentPosition.second > targetPosition.second) {
 			std::cout << "Player moved top left\n";
-			return DirectionToMove::Down_left;
+			return DirectionToMove::Top_left;
 		} else if (currentPosition.second < targetPosition.second) {
 			std::cout << "Player moved down left\n";
-			return DirectionToMove::Top_left;
+			return DirectionToMove::Down_left;
 		}
 	}
 	else if (currentPosition.first < targetPosition.first) {
@@ -106,26 +115,14 @@ BaseCharacter::DirectionToMove BaseCharacter::validateEightDirection(std::pair<i
 			std::cout << "Player moved right\n";
 			return DirectionToMove::Right;
 		} else if (currentPosition.second > targetPosition.second) {
-			std::cout << "Player moved down right\n";
-			return DirectionToMove::Down_right;
-		} else if (currentPosition.second < targetPosition.second) {
 			std::cout << "Player moved top right\n";
 			return DirectionToMove::Top_right;
+		} else if (currentPosition.second < targetPosition.second) {
+			std::cout << "Player moved down right\n";
+			return DirectionToMove::Down_right;
 		}
 	}
 	else if (currentPosition.second > targetPosition.second) {
-		if (currentPosition.first == targetPosition.first) {
-			std::cout << "Player moved down\n";
-			return DirectionToMove::Down;
-		} else if (currentPosition.first > targetPosition.first) {
-			std::cout << "Player moved down left\n";
-			return DirectionToMove::Down_left;
-		} else if (currentPosition.first < targetPosition.first) {
-			std::cout << "Player moved down right\n";
-			return DirectionToMove::Down_right;
-		}
-	}
-	else if (currentPosition.second < targetPosition.second) {
 		if (currentPosition.first == targetPosition.first) {
 			std::cout << "Player moved top\n";
 			return DirectionToMove::Top;
@@ -135,6 +132,18 @@ BaseCharacter::DirectionToMove BaseCharacter::validateEightDirection(std::pair<i
 		} else if (currentPosition.first < targetPosition.first) {
 			std::cout << "Player moved top right\n";
 			return DirectionToMove::Top_right;
+		}
+	}
+	else if (currentPosition.second < targetPosition.second) {
+		if (currentPosition.first == targetPosition.first) {
+			std::cout << "Player moved top\n";
+			return DirectionToMove::Top;
+		} else if (currentPosition.first > targetPosition.first) {
+			std::cout << "Player moved down left\n";
+			return DirectionToMove::Down_left;
+		} else if (currentPosition.first < targetPosition.first) {
+			std::cout << "Player moved down right\n";
+			return DirectionToMove::Down_right;
 		}
 	}
 }
@@ -147,11 +156,11 @@ BaseCharacter::DirectionToMove BaseCharacter::validateFourDirection(std::pair<in
 		std::cout << "Enemy moved right\n";
 		return DirectionToMove::Right;
 	}else if (currentPosition.second > targetPosition.second) {
-		std::cout << "Enemy moved down\n";
-		return DirectionToMove::Down;
-	} else if (currentPosition.second < targetPosition.second) {
 		std::cout << "Enemy moved top\n";
 		return DirectionToMove::Top;
+	} else if (currentPosition.second < targetPosition.second) {
+		std::cout << "Enemy moved down\n";
+		return DirectionToMove::Down;
 	}
 }
 

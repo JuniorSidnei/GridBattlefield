@@ -89,6 +89,8 @@ public:
     inline std::string getClassName() { return m_characterStatus[m_characterClass].ClassName; }
     inline CharacterClass getClass() { return m_characterClass; }
 
+    std::string getCharacterType(CharacterType type);
+
     bool isCloseToTarget();
     void moveToTarget(Grid &grid);
     void createNewGridBox(int newX, int newY, int gridCollumns);
@@ -131,21 +133,21 @@ protected:
     };
 
     std::map<CharacterClass, CharacterStatus> m_characterStatus {
-        { CharacterClass::Paladin, CharacterStatus(250, 25.0f, 1.2f, 'P', "Paladin")},
-        { CharacterClass::Archer, CharacterStatus(150, 35.0f, 1.5f, 'A', "Archer")},
+        { CharacterClass::Paladin, CharacterStatus(450, 25.0f, 1.2f, 'P', "Paladin")},
+        { CharacterClass::Archer, CharacterStatus(350, 25.0f, 1.5f, 'A', "Archer")},
         { CharacterClass::Warrior, CharacterStatus(350, 30.0f, 1.2f, 'W', "Warrior")},
-        { CharacterClass::Cleric, CharacterStatus(200, 20.0f, 1.3f, 'C', "Cleric")}
+        { CharacterClass::Cleric, CharacterStatus(550, 20.0f, 1.3f, 'C', "Cleric")}
     };
 
     std::map<DirectionToMove, std::pair<int, int>> m_directionPosition {
-        { DirectionToMove::Left,        std::make_pair(-1,  0) },
-        { DirectionToMove::Top_left,    std::make_pair(-1,  1) },
-        { DirectionToMove::Top,         std::make_pair(0,   1) },
-        { DirectionToMove::Top_right,   std::make_pair(1,   1) },
-        { DirectionToMove::Right,       std::make_pair(0,   1) },
-        { DirectionToMove::Down_right,  std::make_pair(1,  -1) },
-        { DirectionToMove::Down,        std::make_pair(0,  -1) },
-        { DirectionToMove::Down_left,   std::make_pair(-1, -1) },
+        { DirectionToMove::Left,        std::make_pair(-1,   0) },
+        { DirectionToMove::Top_left,    std::make_pair(-1,  -1) },
+        { DirectionToMove::Top,         std::make_pair(0,   -1) },
+        { DirectionToMove::Top_right,   std::make_pair(1,   -1) },
+        { DirectionToMove::Right,       std::make_pair(1,    0) },
+        { DirectionToMove::Down_right,  std::make_pair(1,    1) },
+        { DirectionToMove::Down,        std::make_pair(0,    1) },
+        { DirectionToMove::Down_left,   std::make_pair(-1,   1) },
     };
 };
 #endif

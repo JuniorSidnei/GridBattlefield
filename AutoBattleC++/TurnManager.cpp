@@ -12,6 +12,7 @@ void TurnManager::handleTurn(Grid &grid, std::vector<std::unique_ptr<BaseCharact
 	std::cout << "Turn: " << m_currentTurn << ", starting now!\n";
 	for(auto &character : characters) {
 		if (character->isDead()) {
+			std::cout << "The battle is decided in turn: " << m_currentTurn << ", and the team winner is...\n";
 			if (character->getType() == BaseCharacter::CharacterType::Player) {
 				std::cout << "ENEMY TEAM WON!\n";
 			} else {
@@ -22,11 +23,11 @@ void TurnManager::handleTurn(Grid &grid, std::vector<std::unique_ptr<BaseCharact
 		}
 
 		if (character->isCloseToTarget()) {
-			std::cout << "Character attacked enemy\n";
 			character->attack();
+			std::cout << character->getCharacterType(character->getType()) << " HP is: " << character->getHealth() << "\n";
+			std::cout << character->getTarget()->getCharacterType(character->getTarget()->getType()) << " HP is: " << character->getTarget()->getHealth() << "\n";
 		}
 		else {
-			std::cout << "Character moved to enemy\n";
 			character->moveToTarget(grid);
 			grid.drawBattlefieldWithIcons();
 		}
