@@ -15,7 +15,6 @@ Grid::Grid(int lines, int columns) {
         for (int j = 0; j < m_collumns; j++) {
             auto *newBox = new GridBox(j, i, false, false, (m_collumns * i + j));
             m_gridBoxes.insert(m_gridBoxes.end(), *newBox);
-            //std::cout << "grid box index: " << newBox.getGridIndex() << " \n";
         }
     }
     
